@@ -1,7 +1,7 @@
 CC = gcc
-CFLAGS = -Wall -O2
+CFLAGS = -Wall -Werror -O2
 
-all: SimpleHttp.a test
+all: SimpleHttp.a example
 
 SimpleHttp.o: SimpleHttp.c SimpleHttp.h
 	$(CC) $(CFLAGS) SimpleHttp.c -c -o SimpleHttp.o
@@ -9,10 +9,11 @@ SimpleHttp.o: SimpleHttp.c SimpleHttp.h
 SimpleHttp.a: SimpleHttp.o
 	$(AR) rcs libSimpleHttp.a SimpleHttp.o
 
-test: SimpleHttp.a test.c
-	$(CC) test.c libSimpleHttp.a -o test
+example: SimpleHttp.a example.c
+	$(CC) example.c libSimpleHttp.a -o example
 
 clean:
+	rm -rf example
 	rm -rf *.o
 	rm -rf *.a
 	rm -rf *~
